@@ -1,5 +1,5 @@
 
-#Re-Aligned Continuous Sign Language Recognition
+# Re-Aligned Continuous Sign Language Recognition
 
 This repository contains software to replicate the iterative realignment for continuous sign language recognition as described in:
 
@@ -11,9 +11,9 @@ O. Koller, N. C. Camgoz, H. Ney, and R. Bowden. Weakly Supervised Learning with 
 
 Please cite those works if this code helps you in your research.
 
-##Installation
+## Installation
 
-###Requirements & Dependencies
+### Requirements & Dependencies
 
 * SGE scheduler with CPU and GPU nodes
 * RASR - Speech Toolkit https://www-i6.informatik.rwth-aachen.de/rwth-asr/
@@ -22,13 +22,13 @@ Please cite those works if this code helps you in your research.
 * leveldb - https://github.com/google/leveldb
 * hdf5
 
-###Setup
+### Setup
 
 1. clone the repo
 2. softlink the folder 'executables' to a folder where the RASR executables are located 
 3. inside shared.config adjust links to the caffe binary and to the leveldb data sets
 
-##Dataset Structures
+## Dataset Structures
 
 Datasets used for training and evaluation consist of images only (videos currently not supported). 
 The images that belong to one sequence are stored in a joint subfolder.
@@ -67,7 +67,7 @@ dev/ train/ test/ folders contain the leveldb files, those store the images whic
 The data sets have been created with following command:
 caffe/build/tools/convert_imageset path-to-images/ dev.txt /leveldb/dev -resize_height 256 -resize_width 256 -backend leveldb
 
-##Create a LevelDB Dataset
+## Create a LevelDB Dataset
 
 Use the caffe tool convert_images. 
 
@@ -79,7 +79,7 @@ The feedforward networks are trained on shuffled data. Hence we need a shuffled 
 test and dev can be linked from the non-shuffled leveldb. The LSTM networks are trained with unshuffled data.
 
 
-##Create a Corpus
+## Create a Corpus
 
 RASR expects corpora in xml format. Use this tool to convert a plain text corpus into XML:
   tools/createcorpusFromFile.py      
@@ -88,7 +88,7 @@ RASR expects corpora in xml format. Use this tool to convert a plain text corpus
 
 The language model is used for decoding only. RASR supports different formats. In this context typically a count-based n-gram LM is used. This can be created with the SRILM toolkit.
 
-##Training
+## Training
 
 start the training with start.sh
 
@@ -105,17 +105,14 @@ Following steps will be executed:
 * 05.generate-prior-mix :arrow_right: counts priors from framelabel text files
 * 06.align-2stream :arrow_right: performs alignment using the framewise posteriors from the feature caches. writes out alignment cache
 
-##Recognition
+## Recognition
 todo
 
-##Debugging
+## Debugging
 
-todo
-archiver
-
-###How to visualise the posterior caches
+### How to visualise the posterior caches
 executables/archiver.linux-x86_64-standard --mode show data/it2.03.posteriors-0.dev/it2.0.train.cache.0000 phoenix2016-glosstranslation/29March_2010_Monday_tagesschau-8384/1
 
-###How to visualise the alignment caches
+### How to visualise the alignment caches
 executables/archiver.linux-x86_64-standard --mode show --type align data/it1.06.align-prior0.6.ph16-Pfh7-3stBLSTM-weigh05025025-Si/it1.align.06.align-prior0.6.ph16-Pfh7-3stBLSTM-weigh05025025-Si-2.cache.0001 phoenix2016-glosstranslation/29March_2010_Monday_tagesschau-8384/1
 
