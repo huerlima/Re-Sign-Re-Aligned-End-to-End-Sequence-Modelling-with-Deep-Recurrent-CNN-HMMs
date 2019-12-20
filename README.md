@@ -84,7 +84,7 @@ test and dev can be linked from the non-shuffled leveldb. The LSTM networks are 
 RASR expects corpora in xml format. Use this tool to convert a plain text corpus into XML:
   tools/createcorpusFromFile.py      
 
-##Create a Language Model
+## Create a Language Model
 
 The language model is used for decoding only. RASR supports different formats. In this context typically a count-based n-gram LM is used. This can be created with the SRILM toolkit.
 
