@@ -1,4 +1,7 @@
 #!/bin/bash                
+# link the leveldb to get around the lock that is created
+# in this way multiple experiments can read from the same leveldb
+
 
 to=data/leveldb_shuffle
 shuffle=`grep shared-leveldb-folder-shuffle shared.config | cut -d"=" -f2| tr -d " "`
