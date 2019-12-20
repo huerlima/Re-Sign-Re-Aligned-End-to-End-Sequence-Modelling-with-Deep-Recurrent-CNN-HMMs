@@ -39,7 +39,7 @@ A non shuffled version is needed for the LSTM training, as we train on full sequ
 The images are converted into a leveldb dataset, which resides in the folder named by the partition they belong to (test, dev, train).
 
 a) dataset having all images and sequences in order:
-
+```
 leveldb/
   train/
   dev/
@@ -48,9 +48,9 @@ leveldb/
   train.txt
   dev.txt
   train.mean
-
+```
 b) dataset with all images shuffled (on the frame level):
-
+```
 leveldb_shuffle/
   train/
   dev/
@@ -58,7 +58,7 @@ leveldb_shuffle/
   test_shuffle.txt
   train_shuffle.txt
   dev_shuffle.txt
-
+```
 Only the train set is required to be shuffled. test and dev can be links to the unshuffled dataset.
 
 train.mean contains the pixelwise mean stored as binary blob produced by caffe/tools/compute_image_mean.cpp
@@ -70,9 +70,9 @@ caffe/build/tools/convert_imageset path-to-images/ dev.txt /leveldb/dev -resize_
 ## Create a LevelDB Dataset
 
 Use the caffe tool convert_images. 
-
+```
 caffe/tools/convert_imageset point_to_image_folder/ train_shuffle.txt output/leveldb/train/ -resize_height 256 -resize_width 256 -backend leveldb
-
+```
 train_shuffle.txt is an image list. It is two column, space separated and contains the relative path to the images and a dummy label value. 
 
 The feedforward networks are trained on shuffled data. Hence we need a shuffled train set: shuffle the image_list.txt and create a database in the leveldb_shuffle/ folder.
@@ -91,9 +91,9 @@ The language model is used for decoding only. RASR supports different formats. I
 ## Training
 
 start the training with start.sh
-
+```
 sh start.sh <start-iteration> <stop-iteration>
-
+```
 set start-iteration to 0 to initialise everything
 
 Following steps will be executed:
@@ -111,8 +111,10 @@ todo
 ## Debugging
 
 ### How to visualise the posterior caches
+```
 executables/archiver.linux-x86_64-standard --mode show data/it2.03.posteriors-0.dev/it2.0.train.cache.0000 phoenix2016-glosstranslation/29March_2010_Monday_tagesschau-8384/1
-
+```
 ### How to visualise the alignment caches
+```
 executables/archiver.linux-x86_64-standard --mode show --type align data/it1.06.align-prior0.6.ph16-Pfh7-3stBLSTM-weigh05025025-Si/it1.align.06.align-prior0.6.ph16-Pfh7-3stBLSTM-weigh05025025-Si-2.cache.0001 phoenix2016-glosstranslation/29March_2010_Monday_tagesschau-8384/1
-
+```
